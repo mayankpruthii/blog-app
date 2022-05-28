@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require("dotenv").config();
 
+const blogRoutes = require("./routes/blog");
+
 const app = express();
 
 app.use(morgan("dev"));
@@ -12,9 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-app.get("/api", (req, res) => {
-	res.json({ time: Date().toString() });
-});
+app.use("/api", blogRoutes);
 
 mongoose
 	.connect(process.env.DATABASE)
