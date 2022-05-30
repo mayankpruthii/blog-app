@@ -1,11 +1,14 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import mongoose from "mongoose";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
 
-const blogRoutes = require("./routes/blog");
+import blogRoutes from "./routes/blog"
+import authRoutes from "./routes/auth";
+
+dotenv.config();
 
 const app = express();
 
@@ -14,7 +17,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-app.use("/api", blogRoutes);
+app.use("/api/blog", blogRoutes);
+app.use("/api/user", authRoutes);
 
 mongoose
 	.connect(process.env.DATABASE)

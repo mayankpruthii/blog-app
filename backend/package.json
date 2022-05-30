@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon --es-module-specifier-resolution=node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,8 +15,16 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-jwt": "^7.7.3",
+    "express-validator": "^6.14.1",
+    "formidable": "^2.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "loadash": "^1.0.0",
     "mongoose": "^6.3.4",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.16"
-  }
+    "nodemon": "^2.0.16",
+    "slugify": "^1.6.5",
+    "string-strip-html": "^9.1.12"
+  },
+  "type": "module" 
 }

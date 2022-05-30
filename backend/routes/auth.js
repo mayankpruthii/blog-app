@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
 
-import { time } from "../controllers/blog";
+import { signup } from "../controllers/auth";
 
-router.get("/", time);
+router.post("/signup", signup);
 
 export default router;
