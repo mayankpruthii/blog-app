@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 import crypto from "crypto";
 
 interface UserDocument {
-	username: String;
-	name: String;
-	email: String;
-	profile: String;
-	hashed_password: String;
-	salt: String;
-	role: Number;
-	photo: Buffer;
-	resetPasswordLink: String;
+	username: string;
+	name: string;
+	email: string;
+	profile: string;
+	hashed_password: string;
+	salt: string;
+	role: number;
+	photo: string;
+	resetPasswordLink: string;
 }
 
 const userSchema = new mongoose.Schema(
