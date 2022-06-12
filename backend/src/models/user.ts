@@ -1,5 +1,17 @@
-const mongoose = require("mongoose");
-const crypto = require("crypto");
+import mongoose from "mongoose";
+import crypto from "crypto";
+
+interface UserDocument {
+	username: String;
+	name: String;
+	email: String;
+	profile: String;
+	hashed_password: String;
+	salt: String;
+	role: Number;
+	photo: Buffer;
+	resetPasswordLink: String;
+}
 
 const userSchema = new mongoose.Schema(
 	{
@@ -53,4 +65,4 @@ const userSchema = new mongoose.Schema(
 	{ timestamps: true },
 );
 
-module.exports = mongoose.model("User", userSchema);
+export const User = mongoose.model<UserDocument>("User", userSchema);

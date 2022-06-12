@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --es-module-specifier-resolution=node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
+    "concurrently": "^7.2.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -20,11 +23,20 @@
     "formidable": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "loadash": "^1.0.0",
-    "mongoose": "^6.3.4",
+    "mongoose": "^6.3.6",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16",
     "slugify": "^1.6.5",
     "string-strip-html": "^9.1.12"
   },
-  "type": "module" 
+  "type": "module",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^17.0.38",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.2"
+  }
 }

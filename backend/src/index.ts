@@ -1,16 +1,18 @@
-import express from "express";
-import mongoose from "mongoose";
+import express, { Express } from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import blogRoutes from "./routes/blog"
-import authRoutes from "./routes/auth";
+import connectDatabase from "./config/db.js";
+import blogRoutes from "./routes/blog.js";
+import authRoutes from "./routes/auth.js";
+
+connectDatabase();
 
 dotenv.config();
 
-const app = express();
+const app: Express = express();
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -19,11 +21,6 @@ app.use(cors());
 
 app.use("/api/blog", blogRoutes);
 app.use("/api/user", authRoutes);
-
-mongoose
-	.connect(process.env.DATABASE)
-	.then(() => console.log("DB connected"))
-	.catch((err) => console.error(err));
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
