@@ -25,6 +25,7 @@
     "loadash": "^1.0.0",
     "mongoose": "^6.3.6",
     "morgan": "^1.10.0",
+    "nanoid": "^4.0.0",
     "nodemon": "^2.0.16",
     "slugify": "^1.6.5",
     "string-strip-html": "^9.1.12"
