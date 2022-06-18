@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema(
 			unique: true,
 			lowercase: true,
 		},
-		profile: {
+		user_url: {
 			type: String,
 			required: true,
 		},
@@ -65,4 +65,40 @@ const userSchema = new mongoose.Schema(
 	{ timestamps: true },
 );
 
-export const User = mongoose.model<UserDocument>("User", userSchema);
+userSchema
+	.virtual("password")
+	.set(function (password: string) {
+		this._password = password;
+		this.salt = this.makeSalt();
+		this.hashed_password = this.encryptPassword(password);
+	})
+	.get(function () {
+		return this._password;
+	});
+
+userSchema.methods = {
+	authenticate: function(plainPassword: string): boolean {
+		let doesPasswordMatch: boolean = this.encryptPassword(plainPassword) === this.hashed_password;
+		return doesPasswordMatch;
+	},
+	makeSalt: function (): string {
+		let salt: string = Math.round(new Date().valueOf() + Math.random()) + "";
+		return salt;
+	},
+	encryptPassword: function (password: string): string {
+		if (!password) {
+			return "";
+		}
+		try {
+			return crypto
+				.createHmac("sha256", this.salt)
+				.update(password)
+				.digest("hex");
+		} catch (error) {
+			return "";
+		}
+	},
+};
+
+const User = mongoose.model<UserDocument>("User", userSchema);
+export default User;

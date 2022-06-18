@@ -1,21 +1,21 @@
 import { Request, Response, NextFunction } from "express";
-import { validationResult } from "express-validator";
 
+import User from "../models/user.js";
 import { failJSON } from "../utils/returnJson.js";
 
-export const runValidation = (
+export const checkIfUserExists = async (
 	req: Request,
 	res: Response,
 	next: NextFunction,
 ) => {
-	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
+	const user = await User.findOne({ email: req.body.email });
+	if (user) {
 		return failJSON(
 			res,
 			{
-				error: errors.array()[0].msg,
+				error: "User already exists",
 			},
-			422,
+			401,
 		);
 	}
 	next();
